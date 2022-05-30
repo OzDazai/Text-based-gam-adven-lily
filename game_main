@@ -1,8 +1,12 @@
 
+
+from asyncore import ExitNow
 import time
 import sys
-
-def start_game():
+red = []
+def start_game():  
+    if (red == "true"):
+        end()
     print ("###################################################\n")
     print ('        WELCOME TO THE ADVENTURE OF LILY!             ')
     print ("\n###################################################\n")
@@ -11,27 +15,28 @@ def start_game():
     print ('                [\033[32mQ\033[37m]uit')
     print ("\n###################################################")
 
-    while True:
-        action = input("action: ").upper()
-        if  action == "Q":
-            Quit = 'You choose to Quit the game!!'
-            for characters in Quit:
-                sys.stdout.write(characters)
-                sys.stdout.flush()
-                time.sleep(0.05)
-            break
-        elif action == "S":
-            scene1()
-        elif action == "A":
-            about = 'This game is a text based adventure game \n where the player can choose how the game will progress.\n\n\n\n\n\n\n\n\n\n\n'
-            for characters in about:
-                sys.stdout.write(characters)
-                sys.stdout.flush()
-                time.sleep(0.05)
-            start_game()
-        else:
-            print ('\033[31mInvalid input!!\033[37m')
-            start_game()
+    action = input("action: ").upper()
+    if  action == "Q":
+        Quit = 'You choose to Quit the game!!\n\n\n\n'
+        for characters in Quit:
+            sys.stdout.write(characters)
+            sys.stdout.flush()
+            time.sleep(0.05)
+        end()
+            
+    elif action == "S":
+        scene1()
+    elif action == "A":
+        about = 'This game is a text based adventure game \n where the player can choose how the game will progress.\n\n\n\n\n\n\n\n\n\n\n'
+        for characters in about:
+            sys.stdout.write(characters)
+            sys.stdout.flush()
+            time.sleep(0.05)
+        start_game()
+    else:
+        print ('\033[31mInvalid input!!\033[37m')
+        start_game()
+
 
 
 
@@ -39,7 +44,7 @@ def scene1():
     prin =(""" 
         Let's start the action! ☆-🎬-☆ 
  
-        Lily wakes up in her bedroom in the middle of the night. She heard a loud BANG outside the house. 
+        Lily wakes up in her bedroom in the middle of the night. She heard a loud \033[31mBANG\033[37m outside the house. 
         Now she has two choices she can either stay in the room or check what the sound might be about. 
  
          
@@ -51,7 +56,7 @@ def scene1():
     print ("Type your choice: \033[32mStay\033[37m or \033[32mEvaluate\033[37m?")
 
     c1 = input()
-    time.sleep(2)
+    time.sleep(1)
     ans = 'incorrect'
     while (ans == 'incorrect'):
         if (c1.upper() == "STAY"):
@@ -86,7 +91,11 @@ def scene1():
                     print ('\033[31mInvalid input!!\033[37m')
 
         elif (c1.upper() == "EVALUATE"):
-            print("Lily exits the room silently and reaches the main hall.")
+            prin =("Lily exits the room silently and reaches the main hall.")
+            for characters in prin:
+                sys.stdout.write(characters)
+                sys.stdout.flush()
+                time.sleep(0.03)
             ans = 'correct'
             scene2()
         else:
@@ -111,25 +120,40 @@ def scene2():
     ans = 'incorrect'
     while (ans == 'incorrect'):
         if (c1.upper() == "PICK"):
-            print(
+            prin2 =(
                 """\nThe moment Lily picked up the the teddy bear. The Teddy bear starts TALKING!The bear tells Lily that she is in grave danger as there is a monster in the house.And the monster has captured her PARENTS as well!But he hugged her and told her not to get scared as he knows how to beat the moster!""")
+            for characters in prin2:
+                sys.stdout.write(characters)
+                sys.stdout.flush()
+                time.sleep(0.03)
             time.sleep(2)
-            print(
-                """\nThe bear handed lily a magical potion which can weaken the moster and make him run away!He handed her the potion and then DISAPPEARED!Lily moved forward.""")
+            prin=(
+                """\nThe bear handed lily a magical potion which can weaken the moster and make him run away!He handed her the potion and then DISAPPEARED!Lily moved forward.""")  
+            for characters in prin:
+                sys.stdout.write(characters)
+                sys.stdout.flush()
+                time.sleep(0.03)
+        
             ans = 'correct'
             pick = "True"
         elif (c1.upper() == 'IGNORE'):
-            print("""\nLily decided not to pick up the bear and walked forward.""")
+            pr=("""\nLily decided not to pick up the bear and walked forward.""")
+            for characters in pr:
+                sys.stdout.write(characters)
+                sys.stdout.flush()
+                time.sleep(0.03)
+                
             ans = 'correct'
             pick = "False"
         else:
-            print("Wrong Input! Enter pick or ignore?")
+            print("Wrong Input! Enter\033[32mPick\033[37m or \033[32mIgnore\033[37m?")
             c1 = input()
     time.sleep(2)
     scene3(pick)
 
 
 def scene3(pick_value):
+    global red
     import time
     prin =("""\n\nAfter walking for a while, Lily saw the MONSTOR in front of her! 
     It had red eyes and evil looks. She got very scared! """)
@@ -137,29 +161,7 @@ def scene3(pick_value):
         sys.stdout.write(characters)
         sys.stdout.flush()
         time.sleep(0.03)
-    print ("""  ▒▒▒▒▒▒▒▒▒▒▒▄▄▄▄░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-    ▒▒▒▒▒▒▒▒▒▄██████▒▒▒▒▒▄▄▄█▄▒▒▒▒▒▒▒▒▒▒
-    ▒▒▒▒▒▒▒▄██▀░░▀██▄▒▒▒▒████████▄▒▒▒▒▒▒
-    ▒▒▒▒▒▒███░░░░░░██▒▒▒▒▒▒█▀▀▀▀▀██▄▄▒▒▒
-    ▒▒▒▒▒▄██▌░░░░░░░██▒▒▒▒▐▌▒▒▒▒▒▒▒▒▀█▄▒
-    ▒▒▒▒▒███░░▐█░█▌░██▒▒▒▒█▌▒▒▒▒▒▒▒▒▒▒▀▌
-    ▒▒▒▒████░▐█▌░▐█▌██▒▒▒██▒▒▒▒▒▒▒▒▒▒▒▒▒
-    ▒▒▒▐████░▐░░░░░▌██▒▒▒█▌▒▒▒▒▒▒▒▒▒▒▒▒▒
-    ▒▒▒▒████░░░▄█░░░██▒▒▐█▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-    ▒▒▒▒████░░░██░░██▌▒▒█▌▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-    ▒▒▒▒████▌░▐█░░███▒▒▒█▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-    ▒▒▒▒▐████░░▌░███▒▒▒██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-    ▒▒▒▒▒████░░░███▒▒▒▒█▌▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-    ▒▒▒██████▌░████▒▒▒██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-    ▒▐████████████▒▒███▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-    ▒█████████████▄████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-    ██████████████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-    ██████████████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-    █████████████████▀▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-    █████████████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-    ████████████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-    ████████████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-    """)
+
     if (pick_value == "True"):
         time.sleep(2)
         prin=("""But then she remembered! She had the magic portion and she threw it on the moster! 
@@ -173,15 +175,23 @@ def scene3(pick_value):
         for characters in prin2:
             sys.stdout.write(characters)
             sys.stdout.flush()
-            time.sleep(0.03)
-        end()
+            time.sleep(0.05)
+        red = "true"
+        start_game()
+        
     elif (pick_value == "False"):
-        print("The monster attacked Lily and hurt her! She was then thrown to the new world by the monster!")
+        pri=("The monster attacked Lily and hurt her! She was then thrown to the new world by the monster!")
+        for characters in pri:
+            sys.stdout.write(characters)
+            sys.stdout.flush()
+            time.sleep(0.03)
+        red = "true"
+        start_game()
 
 def scene1c2():
     pass
 def end():
-    end =  "GAME OVER!!!\n\n\n\n\n\n\n\n"
+    end =  "\n\n\nGAME OVER!!!\n\n\n\n\n\n\n\n"
     for characters in end:
         sys.stdout.write(characters)
         sys.stdout.flush()
@@ -227,6 +237,10 @@ def end():
     
     """)
     print("\n\n")
-    print("=================================END OF CHAPTER 1=================================")
-    start_game()
+    print("=================================END OF CHAPTER 1=================================\n\n\n\n\n\n\n\n\n")
+    
+    
 start_game()
+quit()
+def quit():
+    print ("SAYONARA")
